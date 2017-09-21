@@ -16,8 +16,7 @@ const dictionary = new Dictionary({
     }
 });
 
-export default class Validator
-{
+export default class Validator {
     constructor(validations, $vm) {
         this.strictMode = STRICT_MODE;
         this.$fields = {};

@@ -1,7 +1,6 @@
 import { getScope, debounce, warn, getDataAttribute } from './utils/helpers';
 
-export default class ListenerGenerator
-{
+export default class ListenerGenerator {
     constructor(el, binding, vnode, options) {
         this.callbacks = [];
         this.el = el;
@@ -136,7 +135,7 @@ export default class ListenerGenerator
 
         if (this.el.tagName === 'SELECT') {
             return {
-                names: ['change', 'blur'],
+                names: ['change'],
                 listener: this._inputListener
             };
         }
@@ -166,7 +165,7 @@ export default class ListenerGenerator
 
         default:
             listener = {
-                names: ['input', 'blur'],
+                names: ['input'],
                 listener: this._inputListener
             };
             break;

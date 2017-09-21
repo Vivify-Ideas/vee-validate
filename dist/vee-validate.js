@@ -11,41 +11,41 @@
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-
+/******/
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-
+/******/
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
-
+/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
-
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-
-
+/******/
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-
+/******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-
+/******/
 /******/ 	// identity function for calling harmory imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
-
+/******/
 /******/ 	// define getter function for harmory exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		Object.defineProperty(exports, name, {
@@ -54,7 +54,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 			get: getter
 /******/ 		});
 /******/ 	};
-
+/******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -63,13 +63,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		__webpack_require__.d(getter, 'a', getter);
 /******/ 		return getter;
 /******/ 	};
-
+/******/
 /******/ 	// Object.prototype.hasOwnProperty.call
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-
+/******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-
+/******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 53);
 /******/ })
@@ -141,9 +141,8 @@ var debounce = function debounce(func) {
     var timeout = void 0;
 
     return function debounced(_ref) {
-        var _ref2 = _toArray(_ref);
-
-        var args = _ref2;
+        var _ref2 = _toArray(_ref),
+            args = _ref2.slice(0);
 
         var obj = this;
 
@@ -213,8 +212,6 @@ module.exports = exports['default'];
 
 "use strict";
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -318,27 +315,19 @@ var ErrorBag = function () {
     }, {
         key: 'collect',
         value: function collect(field, scope) {
-            var _this = this;
-
             var map = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
             if (!field) {
-                var _ret = function () {
-                    var collection = {};
-                    _this.errors.forEach(function (e) {
-                        if (!collection[e.field]) {
-                            collection[e.field] = [];
-                        }
+                var collection = {};
+                this.errors.forEach(function (e) {
+                    if (!collection[e.field]) {
+                        collection[e.field] = [];
+                    }
 
-                        collection[e.field].push(map ? e.msg : e);
-                    });
+                    collection[e.field].push(map ? e.msg : e);
+                });
 
-                    return {
-                        v: collection
-                    };
-                }();
-
-                if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+                return collection;
             }
 
             if (scope) {
@@ -456,13 +445,10 @@ var ErrorBag = function () {
         key: 'selector',
         value: function selector(field) {
             if (field.indexOf(':') > -1) {
-                var _field$split = field.split(':');
-
-                var _field$split2 = _slicedToArray(_field$split, 2);
-
-                var name = _field$split2[0];
-                var rule = _field$split2[1];
-
+                var _field$split = field.split(':'),
+                    _field$split2 = _slicedToArray(_field$split, 2),
+                    name = _field$split2[0],
+                    rule = _field$split2[1];
 
                 return { name: name, rule: rule };
             }
@@ -1435,10 +1421,10 @@ var listenersInstances = [];
             listenersInstances.push({ vm: vnode.context, el: el, instance: listener });
         },
         update: function update(el, _ref, _ref2) {
-            var expression = _ref.expression;
-            var value = _ref.value;
-            var modifiers = _ref.modifiers;
-            var oldValue = _ref.oldValue;
+            var expression = _ref.expression,
+                value = _ref.value,
+                modifiers = _ref.modifiers,
+                oldValue = _ref.oldValue;
             var context = _ref2.context;
 
             if (!expression || value === oldValue) {
@@ -2035,7 +2021,7 @@ var ListenerGenerator = function () {
 
             if (this.el.tagName === 'SELECT') {
                 return {
-                    names: ['change', 'blur'],
+                    names: ['change'],
                     listener: this._inputListener
                 };
             }
@@ -2065,7 +2051,7 @@ var ListenerGenerator = function () {
 
                 default:
                     listener = {
-                        names: ['input', 'blur'],
+                        names: ['input'],
                         listener: this._inputListener
                     };
                     break;
@@ -2209,10 +2195,9 @@ var ListenerGenerator = function () {
         value: function attach() {
             var _this8 = this;
 
-            var _resolveValueGetter2 = this._resolveValueGetter();
-
-            var context = _resolveValueGetter2.context;
-            var getter = _resolveValueGetter2.getter;
+            var _resolveValueGetter2 = this._resolveValueGetter(),
+                context = _resolveValueGetter2.context,
+                getter = _resolveValueGetter2.getter;
 
             this.vm.$validator.attach(this.fieldName, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_helpers__["c" /* getDataAttribute */])(this.el, 'rules'), {
                 scope: function scope() {
@@ -2278,10 +2263,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         return 'The ' + field + ' field may only contain alphabetic characters.';
     },
     between: function between(field, _ref) {
-        var _ref2 = _slicedToArray(_ref, 2);
+        var _ref2 = _slicedToArray(_ref, 2),
+            min = _ref2[0],
+            max = _ref2[1];
 
-        var min = _ref2[0];
-        var max = _ref2[1];
         return 'The ' + field + ' field must be between ' + min + ' and ' + max + '.';
     },
     confirmed: function confirmed(field) {
@@ -2291,24 +2276,23 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         return 'The ' + field + ' field is invalid.';
     },
     decimal: function decimal(field) {
-        var _ref3 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ['*'];
+        var _ref3 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ['*'],
+            _ref4 = _slicedToArray(_ref3, 1),
+            decimals = _ref4[0];
 
-        var _ref4 = _slicedToArray(_ref3, 1);
-
-        var decimals = _ref4[0];
         return 'The ' + field + ' field must be numeric and may contain ' + (decimals === '*' ? '' : decimals) + ' decimal points.';
     },
     digits: function digits(field, _ref5) {
-        var _ref6 = _slicedToArray(_ref5, 1);
+        var _ref6 = _slicedToArray(_ref5, 1),
+            length = _ref6[0];
 
-        var length = _ref6[0];
         return 'The ' + field + ' field must be numeric and exactly contain ' + length + ' digits.';
     },
     dimensions: function dimensions(field, _ref7) {
-        var _ref8 = _slicedToArray(_ref7, 2);
+        var _ref8 = _slicedToArray(_ref7, 2),
+            width = _ref8[0],
+            height = _ref8[1];
 
-        var width = _ref8[0];
-        var height = _ref8[1];
         return 'The ' + field + ' field must be ' + width + ' pixels by ' + height + ' pixels.';
     },
     email: function email(field) {
@@ -2327,30 +2311,30 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         return 'The ' + field + ' field must be a valid ip address.';
     },
     max: function max(field, _ref9) {
-        var _ref10 = _slicedToArray(_ref9, 1);
+        var _ref10 = _slicedToArray(_ref9, 1),
+            length = _ref10[0];
 
-        var length = _ref10[0];
         return 'The ' + field + ' field may not be greater than ' + length + ' characters.';
     },
     max_value: function max_value(field, _ref11) {
-        var _ref12 = _slicedToArray(_ref11, 1);
+        var _ref12 = _slicedToArray(_ref11, 1),
+            max = _ref12[0];
 
-        var max = _ref12[0];
         return 'The ' + field + ' field must be ' + max + ' or less.';
     },
     mimes: function mimes(field) {
         return 'The ' + field + ' field must have a valid file type.';
     },
     min: function min(field, _ref13) {
-        var _ref14 = _slicedToArray(_ref13, 1);
+        var _ref14 = _slicedToArray(_ref13, 1),
+            length = _ref14[0];
 
-        var length = _ref14[0];
         return 'The ' + field + ' field must be at least ' + length + ' characters.';
     },
     min_value: function min_value(field, _ref15) {
-        var _ref16 = _slicedToArray(_ref15, 1);
+        var _ref16 = _slicedToArray(_ref15, 1),
+            min = _ref16[0];
 
-        var min = _ref16[0];
         return 'The ' + field + ' field must be ' + min + ' or more.';
     },
     not_in: function not_in(field) {
@@ -2366,9 +2350,9 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         return 'The ' + field + ' field is required.';
     },
     size: function size(field, _ref17) {
-        var _ref18 = _slicedToArray(_ref17, 1);
+        var _ref18 = _slicedToArray(_ref17, 1),
+            _size = _ref18[0];
 
-        var _size = _ref18[0];
         return 'The ' + field + ' field must be less than ' + _size + ' KB.';
     },
     url: function url(field) {
@@ -2385,10 +2369,9 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 /* harmony default export */ exports["a"] = function (moment) {
     return function (value, _ref) {
-        var _ref2 = _slicedToArray(_ref, 2);
-
-        var targetField = _ref2[0];
-        var format = _ref2[1];
+        var _ref2 = _slicedToArray(_ref, 2),
+            targetField = _ref2[0],
+            format = _ref2[1];
 
         var dateValue = moment(value, format, true);
         var field = document.querySelector("input[name='" + targetField + "']");
@@ -2416,10 +2399,9 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 /* harmony default export */ exports["a"] = function (moment) {
     return function (value, _ref) {
-        var _ref2 = _slicedToArray(_ref, 2);
-
-        var targetField = _ref2[0];
-        var format = _ref2[1];
+        var _ref2 = _slicedToArray(_ref, 2),
+            targetField = _ref2[0],
+            format = _ref2[1];
 
         var dateValue = moment(value, format, true);
         var field = document.querySelector("input[name='" + targetField + "']");
@@ -2447,11 +2429,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 /* harmony default export */ exports["a"] = function (moment) {
     return function (value, _ref) {
-        var _ref2 = _slicedToArray(_ref, 3);
-
-        var min = _ref2[0];
-        var max = _ref2[1];
-        var format = _ref2[2];
+        var _ref2 = _slicedToArray(_ref, 3),
+            min = _ref2[0],
+            max = _ref2[1],
+            format = _ref2[2];
 
         var minDate = moment(min, format, true);
         var maxDate = moment(max, format, true);
@@ -2474,9 +2455,9 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 /* harmony default export */ exports["a"] = function (moment) {
   return function (value, _ref) {
-    var _ref2 = _slicedToArray(_ref, 1);
+    var _ref2 = _slicedToArray(_ref, 1),
+        format = _ref2[0];
 
-    var format = _ref2[0];
     return moment(value, format, true).isValid();
   };
 };
@@ -2521,28 +2502,28 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 /* eslint-disable max-len */
 /* harmony default export */ exports["a"] = {
     after: function after(field, _ref) {
-        var _ref2 = _slicedToArray(_ref, 1);
+        var _ref2 = _slicedToArray(_ref, 1),
+            target = _ref2[0];
 
-        var target = _ref2[0];
         return "The " + field + " must be after " + target + ".";
     },
     before: function before(field, _ref3) {
-        var _ref4 = _slicedToArray(_ref3, 1);
+        var _ref4 = _slicedToArray(_ref3, 1),
+            target = _ref4[0];
 
-        var target = _ref4[0];
         return "The " + field + " must be before " + target + ".";
     },
     date_between: function date_between(field, _ref5) {
-        var _ref6 = _slicedToArray(_ref5, 2);
+        var _ref6 = _slicedToArray(_ref5, 2),
+            min = _ref6[0],
+            max = _ref6[1];
 
-        var min = _ref6[0];
-        var max = _ref6[1];
         return "The " + field + " must be between " + min + " and " + max + ".";
     },
     date_format: function date_format(field, _ref7) {
-        var _ref8 = _slicedToArray(_ref7, 1);
+        var _ref8 = _slicedToArray(_ref7, 1),
+            format = _ref8[0];
 
-        var format = _ref8[0];
         return "The " + field + " must be in the format " + format + ".";
     }
 };
@@ -2595,10 +2576,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 /* harmony default export */ exports["a"] = function (value, _ref) {
-  var _ref2 = _slicedToArray(_ref, 2);
+  var _ref2 = _slicedToArray(_ref, 2),
+      min = _ref2[0],
+      max = _ref2[1];
 
-  var min = _ref2[0];
-  var max = _ref2[1];
   return Number(min) <= value && Number(max) >= value;
 };
 
@@ -2610,9 +2591,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 /* harmony default export */ exports["a"] = function (value, _ref, validatingField) {
-    var _ref2 = _slicedToArray(_ref, 1);
-
-    var confirmedField = _ref2[0];
+    var _ref2 = _slicedToArray(_ref, 1),
+        confirmedField = _ref2[0];
 
     var field = confirmedField ? document.querySelector("input[name='" + confirmedField + "']") : document.querySelector("input[name='" + validatingField + "_confirmation']");
 
@@ -2640,11 +2620,9 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 /* harmony default export */ exports["a"] = function (value) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ['*'];
-
-    var _ref2 = _slicedToArray(_ref, 1);
-
-    var decimals = _ref2[0];
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ['*'],
+        _ref2 = _slicedToArray(_ref, 1),
+        decimals = _ref2[0];
 
     if (Array.isArray(value)) {
         return false;
@@ -2678,9 +2656,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 /* harmony default export */ exports["a"] = function (value, _ref) {
-    var _ref2 = _slicedToArray(_ref, 1);
-
-    var length = _ref2[0];
+    var _ref2 = _slicedToArray(_ref, 1),
+        length = _ref2[0];
 
     var strVal = String(value);
 
@@ -2713,10 +2690,9 @@ var validateImage = function validateImage(file, width, height) {
 };
 
 /* harmony default export */ exports["a"] = function (files, _ref) {
-    var _ref2 = _slicedToArray(_ref, 2);
-
-    var width = _ref2[0];
-    var height = _ref2[1];
+    var _ref2 = _slicedToArray(_ref, 2),
+        width = _ref2[0],
+        height = _ref2[1];
 
     var list = [];
     for (var i = 0; i < files.length; i++) {
@@ -2888,11 +2864,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 
 /* harmony default export */ exports["a"] = function (value) {
-  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [4];
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [4],
+      _ref2 = _slicedToArray(_ref, 1),
+      version = _ref2[0];
 
-  var _ref2 = _slicedToArray(_ref, 1);
-
-  var version = _ref2[0];
   return __WEBPACK_IMPORTED_MODULE_0_validator_lib_isIP___default()(value, version);
 };
 
@@ -2904,9 +2879,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 /* harmony default export */ exports["a"] = function (value, _ref) {
-    var _ref2 = _slicedToArray(_ref, 1);
-
-    var length = _ref2[0];
+    var _ref2 = _slicedToArray(_ref, 1),
+        length = _ref2[0];
 
     if (value === undefined || value === null) {
         return length >= 0;
@@ -2923,9 +2897,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 /* harmony default export */ exports["a"] = function (value, _ref) {
-    var _ref2 = _slicedToArray(_ref, 1);
-
-    var max = _ref2[0];
+    var _ref2 = _slicedToArray(_ref, 1),
+        max = _ref2[0];
 
     if (Array.isArray(value) || value === null || value === undefined || value === '') {
         return false;
@@ -2958,9 +2931,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 /* harmony default export */ exports["a"] = function (value, _ref) {
-    var _ref2 = _slicedToArray(_ref, 1);
-
-    var length = _ref2[0];
+    var _ref2 = _slicedToArray(_ref, 1),
+        length = _ref2[0];
 
     if (value === undefined || value === null) {
         return false;
@@ -2976,9 +2948,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 /* harmony default export */ exports["a"] = function (value, _ref) {
-    var _ref2 = _slicedToArray(_ref, 1);
-
-    var min = _ref2[0];
+    var _ref2 = _slicedToArray(_ref, 1),
+        min = _ref2[0];
 
     if (Array.isArray(value) || value === null || value === undefined || value === '') {
         return false;
@@ -3019,11 +2990,9 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 
 /* harmony default export */ exports["a"] = function (value, _ref) {
-    var _ref2 = _toArray(_ref);
-
-    var regex = _ref2[0];
-
-    var flags = _ref2.slice(1);
+    var _ref2 = _toArray(_ref),
+        regex = _ref2[0],
+        flags = _ref2.slice(1);
 
     if (regex instanceof RegExp) {
         return regex.test(value);
@@ -3057,9 +3026,8 @@ function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 /* harmony default export */ exports["a"] = function (files, _ref) {
-    var _ref2 = _slicedToArray(_ref, 1);
-
-    var size = _ref2[0];
+    var _ref2 = _slicedToArray(_ref, 1),
+        size = _ref2[0];
 
     if (isNaN(size)) {
         return false;
@@ -3087,11 +3055,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 
 /* harmony default export */ exports["a"] = function (value) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [true];
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [true],
+        _ref2 = _slicedToArray(_ref, 1),
+        requireProtocol = _ref2[0];
 
-    var _ref2 = _slicedToArray(_ref, 1);
-
-    var requireProtocol = _ref2[0];
     return __WEBPACK_IMPORTED_MODULE_0_validator_lib_isURL___default()(value, { require_protocol: !!requireProtocol });
 };
 
@@ -3217,6 +3184,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var default_email_options = {
   allow_display_name: false,
+  require_display_name: false,
   allow_utf8_local_part: true,
   require_tld: true
 };
@@ -3235,10 +3203,12 @@ function isEmail(str, options) {
   (0, _assertString2.default)(str);
   options = (0, _merge2.default)(options, default_email_options);
 
-  if (options.allow_display_name) {
+  if (options.require_display_name || options.allow_display_name) {
     var display_email = str.match(displayName);
     if (display_email) {
       str = display_email[1];
+    } else if (options.require_display_name) {
+      return false;
     }
   }
 
@@ -3362,7 +3332,7 @@ function checkHost(host, matches) {
 
 function isURL(url, options) {
   (0, _assertString2.default)(url);
-  if (!url || url.length >= 2083 || /\s/.test(url)) {
+  if (!url || url.length >= 2083 || /[\s<>]/.test(url)) {
     return false;
   }
   if (url.indexOf('mailto:') === 0) {
@@ -3470,20 +3440,19 @@ module.exports = exports['default'];
 
 // eslint-disable-next-line
 var install = function install(Vue) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    var _ref$locale = _ref.locale;
-    var locale = _ref$locale === undefined ? 'en' : _ref$locale;
-    var _ref$delay = _ref.delay;
-    var delay = _ref$delay === undefined ? 0 : _ref$delay;
-    var _ref$errorBagName = _ref.errorBagName;
-    var errorBagName = _ref$errorBagName === undefined ? 'errors' : _ref$errorBagName;
-    var _ref$dictionary = _ref.dictionary;
-    var dictionary = _ref$dictionary === undefined ? null : _ref$dictionary;
-    var _ref$strict = _ref.strict;
-    var strict = _ref$strict === undefined ? true : _ref$strict;
-    var _ref$fieldsBagName = _ref.fieldsBagName;
-    var fieldsBagName = _ref$fieldsBagName === undefined ? 'fields' : _ref$fieldsBagName;
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+        _ref$locale = _ref.locale,
+        locale = _ref$locale === undefined ? 'en' : _ref$locale,
+        _ref$delay = _ref.delay,
+        delay = _ref$delay === undefined ? 0 : _ref$delay,
+        _ref$errorBagName = _ref.errorBagName,
+        errorBagName = _ref$errorBagName === undefined ? 'errors' : _ref$errorBagName,
+        _ref$dictionary = _ref.dictionary,
+        dictionary = _ref$dictionary === undefined ? null : _ref$dictionary,
+        _ref$strict = _ref.strict,
+        strict = _ref$strict === undefined ? true : _ref$strict,
+        _ref$fieldsBagName = _ref.fieldsBagName,
+        fieldsBagName = _ref$fieldsBagName === undefined ? 'fields' : _ref$fieldsBagName;
 
     if (dictionary) {
         __WEBPACK_IMPORTED_MODULE_0__validator__["a" /* default */].updateDictionary(dictionary);
