@@ -1470,7 +1470,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
         }),
         mounted: function mounted() {
-            this.$emit('validatorReady');
+            // this.$emit('validatorReady');
         },
         destroyed: function destroyed() {
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_maps__["a" /* unregister */])(this);
